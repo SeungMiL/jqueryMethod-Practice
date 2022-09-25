@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>선택 정렬</title>
-    <script src="./jquery.js"></script>
+    <!-- <script src="./jquery.js"></script> -->
     <!-- <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script> -->
 </head>
 <body>
@@ -2167,7 +2167,7 @@
                 for(let i = 0; i < method.selector.length; i++) {
                     // for(let [key, value] of Object.entries(arguments[0])){
                     //     // console.log(key, value);
-                    //     method.selector[i].style[`${key}`] = value
+                    //     method.selector[i]. style[`${key}`] = value
                     // };
                     Object.entries(arguments[0]).forEach(function(key) {
                         method.selector[i].style[key[0]] = key[1]
@@ -2188,19 +2188,27 @@
                 let a = method.selector.map(function(x){return x.parentElement.children});
                 let b = method.selector.map(function(x){return x});
                 let c, d;
-                let e = []
+                let e = [];
+                let f = {};
 
                 for(let i = 0; i < a.length; i++) {
                     c = [].slice.call(a[i], function(x) {return x});
                     d = c.filter(function(x){return !b.includes(x)});
                     e.push(d);
                 };
-                
-                return e.flat();
+
+                f.selector = e.flat();
+                f.css = function() {
+                    for(let i = 0; i < f.selector.length; i++) {
+                    Object.entries(arguments[0]).forEach(function(key) {
+                        f.selector[i].style[key[0]] = key[1];
+                    })
+                };
+                }
+
+                return f
             };
 
-
-            
             return method
         }
 
@@ -2208,8 +2216,10 @@
         
         SM('.a').css({'color' : 'red', 'background-color': 'blue'})
         // console.log($('.b').siblings())
+        console.log(SM('.b'))
         console.log(SM('.b').siblings())
-        console.log(SM('.c').siblings().css())
+        console.log(SM('.b').siblings().css({'color': 'red'}))
+        // console.log(SM('.c').siblings().css())
         // $('.a').css('color, red', 'background-color, blue')
         // $('.a').css({'background-color' : 'blue', 'color' : 'red'})
 
@@ -2300,5 +2310,7 @@
         //     let arr=[13, 5, 11, 7, 23, 15];
         //     console.log(solution(arr));
     </script>
+
+    
 </body>
 </html>
