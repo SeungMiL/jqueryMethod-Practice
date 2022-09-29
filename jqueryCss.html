@@ -2156,7 +2156,24 @@
             return this;
         });
 
+        this.siblings = function() {
+            let arr = [];
+            // console.log(this.self);
+            let a = [].map.call(this.self, function(x) {return x.parentNode.children})
+            let b = [].map.call(this.self, function(x) {return x});
 
+            for(let i = 0; i < a.length; i++) {
+                c = [].slice.call(a[i], function(x) {return x});
+                d = c.filter(function(x){return !b.includes(x)});
+                arr.push(d);
+            };
+            
+            let e = arr.flat();
+            
+            this.self = e;
+
+            return this;
+        }
       };
 
 
